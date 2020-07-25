@@ -2,6 +2,21 @@
 
 <h1>Welcome to your Admin page</h1>
 
-<h3>Please select or <a href="/admin/newlanguage">Create</a> a language</h3>
+<h3>Please select a language</h3>
+<ul>
+  <% languages.forEach(language => { %>
+  <li>
+    <a href="/admin/<%= language.languageCode %>"
+      ><%= language.nameInEnglish %></a
+    ><a href="/admin/<%= language._id %>/edit"><button>Edit</button></a>
+  </li>
+  <% }) %>
+</ul>
+<hr />
+<h2>Create Language</h2>
+<form method="POST" action="/admin/">
+  <input type="text" name="nameInEnglish" />
+  <button>Submit</button>
+</form>
 
 <%- include('../includes/footer.ejs') %>

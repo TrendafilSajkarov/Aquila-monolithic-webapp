@@ -3,6 +3,7 @@ const path = require('path');
 const express = require('express');
 const dotenv = require('dotenv');
 const bodyParser = require('body-parser');
+const methodOverride = require('method-override');
 const connectDB = require('./config/db');
 
 const languages = require('./routes/admin/languages');
@@ -18,6 +19,7 @@ dotenv.config({ path: './config/config.env' });
 // Connect to MongoDB
 connectDB();
 
+app.use(methodOverride('_method'));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public')));
 

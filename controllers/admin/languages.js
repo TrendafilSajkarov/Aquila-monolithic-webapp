@@ -20,3 +20,31 @@ exports.getAllLanguages = async (req, res, next) => {
     console.log(err);
   }
 };
+
+// @desc      Create new Language
+// @route     POST  /admin/
+// @access    Protected
+exports.createLanguage = async (req, res, next) => {
+  try {
+    await Language.create(req.body);
+    res.redirect(req.get('referer'));
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+// @desc      Get single language
+// @route     GET  /admin/:languageCode
+// @access    Protected
+exports.getSingleLanguage = async (req, res, next) => {
+  try {
+    let language = await Language.findOne(req.params);
+    language = language.populate({
+      path: 'categories',
+      match: { category: undefined },
+    });
+    res.render('admin/language', { language });
+  } catch (err) {
+    console.log(err);
+  }
+};
