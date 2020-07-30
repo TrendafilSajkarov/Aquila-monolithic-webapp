@@ -1,0 +1,33 @@
+<%- include('../includes/header.ejs') %>
+
+<h1>Edit Application Language: <%= language.nativeName %></h1>
+
+<form method="POST" action="/admin/<%= language._id %>/edit?_method=PUT">
+  <label for="nameInEnglish">English name of the Language:</label>
+  <input
+    id="nameInEnglish"
+    type="text"
+    name="nameInEnglish"
+    value="<%= language.nameInEnglish %>"
+  />
+  <label for="languageCode">Language Code:</label>
+  <input
+    id="languageCode"
+    type="text"
+    name="languageCode"
+    value="<%= language.languageCode %>"
+  />
+  <label for="nativeName">Native Name:</label>
+  <input
+    id="nativeName"
+    type="text"
+    name="nativeName"
+    value="<%= language.nativeName %>"
+  />
+  <button>Submit</button>
+</form>
+<form method="POST" action="/admin/<%= language._id %>/delete?_method=DELETE">
+  <button>Delete</button>
+</form>
+
+<%- include('../includes/footer.ejs') %>

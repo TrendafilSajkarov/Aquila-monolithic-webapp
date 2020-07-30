@@ -1,6 +1,8 @@
 const mongoose = require('mongoose');
 const slugify = require('slugify');
 const ISO6391 = require('iso-639-1');
+const Post = require('./Post');
+const Category = require('./Category');
 
 const LanguageSchema = new mongoose.Schema(
   {

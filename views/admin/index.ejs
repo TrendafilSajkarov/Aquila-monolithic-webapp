@@ -7,15 +7,19 @@
   <% languages.forEach(language => { %>
   <li>
     <a href="/admin/<%= language.languageCode %>"
-      ><%= language.nameInEnglish %></a
-    ><a href="/admin/<%= language._id %>/edit"><button>Edit</button></a>
+      ><%= language.nameInEnglish %>
+    </a>
+    <a href="/admin/<%= language._id %>/edit"
+      ><button>Edit or Delete</button></a
+    >
   </li>
   <% }) %>
 </ul>
 <hr />
 <h2>Create Language</h2>
 <form method="POST" action="/admin/">
-  <input type="text" name="nameInEnglish" />
+  <label for="nameInEnglish">Enter the name of the Language in English</label>
+  <input id="nameInEnglish" type="text" name="nameInEnglish" />
   <button>Submit</button>
 </form>
 

@@ -48,3 +48,46 @@ exports.getSingleLanguage = async (req, res, next) => {
     console.log(err);
   }
 };
+
+// @desc      Edit language - get form
+// @route     GET  /admin/:languageCode/edit
+// @access    Protected
+exports.getEditLanguage = async (req, res, next) => {
+  try {
+    let language = await Language.findById(req.params);
+    res.render('admin/editLanguage', { language });
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+// @desc      Edit language
+// @route     PUT  /admin/:languageCode/edit
+// @access    Protected
+exports.editLanguage = async (req, res, next) => {
+  try {
+    const { nameInEnglish, languageCode, nativeName } = req.body;
+    const slug = slugify(nameInEnglish, { lower: true });
+    await Language.findByIdAndUpdate(
+      req.params._id,
+      { ...req.body, slug },
+      { new: true, runValidators: true }
+    );
+    res.redirect('/admin');
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+// @desc      Delete Language and all of its content
+// @route     DELETE  /admin/:languageCode
+// @access    Protected
+exports.deleteLanguage = async (req, res, next) => {
+  try {
+    const language = await Language.findById(req.params._id);
+    language.remove();
+    res.redirect('/admin');
+  } catch (err) {
+    console.log(err);
+  }
+};
